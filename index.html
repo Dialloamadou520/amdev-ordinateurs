@@ -1845,15 +1845,30 @@
     .inscription-sidebar { position: static; }
   }
 
+  /* HERO RESPONSIVE - TABLET */
+  @media (max-width: 1024px) {
+    .hero { padding: 5rem 1.5rem 4rem; min-height: 80vh; }
+    .hero-container { gap: 2rem; }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); }
+    .hero p { font-size: 1.1rem; max-width: 100%; }
+    .hero-visual { transform: scale(0.9); }
+    .hero-orb.orb-1 { width: 400px; height: 400px; }
+    .hero-orb.orb-2 { width: 500px; height: 500px; }
+    .hero-orb.orb-3 { width: 300px; height: 300px; }
+  }
+
   @media (max-width: 900px) {
-    .hero-container { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-visual { max-width: 350px; margin: 1rem auto 0; }
-    .footer-container { grid-template-columns: 1fr; gap: 2rem; }
-    .hero { min-height: auto; padding: 3rem 1.5rem 2rem; }
-    .hero h1 { font-size: clamp(2rem, 5vw, 3rem); }
-    .hero p { font-size: 1rem; }
-    .hero-buttons { flex-direction: column; width: 100%; }
+    .hero-container { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+    .hero-content { animation: none; }
+    .hero-visual { max-width: 300px; margin: 0 auto; order: -1; }
+    .hero { min-height: auto; padding: 4rem 1.5rem 3rem; }
+    .hero h1 { font-size: 2.2rem; line-height: 1.15; }
+    .hero h1 .accent::after { left: 50%; transform: translateX(-50%); width: 40%; }
+    .hero p { font-size: 1rem; max-width: 100%; margin-left: auto; margin-right: auto; }
+    .hero-buttons { flex-direction: column; width: 100%; max-width: 300px; margin: 0 auto 2rem; }
     .hero-buttons .btn-primary, .hero-buttons .btn-outline { width: 100%; justify-content: center; }
+    .hero-stats { max-width: 100%; margin: 0 auto; }
+    .footer-container { grid-template-columns: 1fr; gap: 2rem; }
   }
 
   @media (max-width: 768px) {
@@ -1909,23 +1924,50 @@
     }
     
     /* HERO MOBILE */
-    .hero { padding: 2rem 1rem 2rem; }
-    .hero h1 { font-size: 1.8rem; line-height: 1.2; }
-    .hero p { font-size: 0.95rem; margin-bottom: 1.5rem; }
-    .hero-badge { font-size: 0.75rem; padding: 0.4rem 0.8rem; margin-bottom: 1rem; }
-    .hero-badge-dot { width: 22px; height: 22px; font-size: 0.75rem; }
-    .hero-stats { grid-template-columns: 1fr; gap: 0.6rem; }
-    .hero-stats .stat { display: flex; align-items: center; gap: 0.8rem; text-align: left; padding: 0.8rem 1rem; }
-    .hero-stats .stat-icon { margin-bottom: 0; font-size: 1.4rem; }
-    .hero-stats .stat-value { font-size: 1.3rem; }
-    .hero-stats .stat-label { font-size: 0.75rem; }
+    .hero { padding: 5rem 1rem 2rem; min-height: auto; }
+    .hero h1 { font-size: 1.6rem; line-height: 1.25; margin-bottom: 1rem; }
+    .hero h1 .highlight { font-size: 1.4rem; }
+    .hero h1 .accent { font-size: 1.8rem; display: block; margin-top: 0.3rem; }
+    .hero p { font-size: 0.9rem; margin-bottom: 1.5rem; line-height: 1.5; }
+    .hero-badge { font-size: 0.7rem; padding: 0.35rem 0.7rem; margin-bottom: 1rem; }
+    .hero-badge-dot { width: 20px; height: 20px; font-size: 0.7rem; }
+    .hero-buttons { gap: 0.8rem; margin-bottom: 1.5rem; }
+    .hero-buttons .btn-primary, .hero-buttons .btn-outline { padding: 0.9rem 1.5rem; font-size: 0.9rem; }
+    .hero-stats { grid-template-columns: 1fr; gap: 0.5rem; }
+    .hero-stats .stat { display: flex; align-items: center; gap: 0.8rem; text-align: left; padding: 0.7rem 1rem; }
+    .hero-stats .stat-icon { margin-bottom: 0; font-size: 1.3rem; }
+    .hero-stats .stat-value { font-size: 1.2rem; }
+    .hero-stats .stat-label { font-size: 0.7rem; }
     .hero-visual { display: none; }
-    .scroll-down { margin-top: 1.5rem; }
-    .scroll-down a { font-size: 0.8rem; padding: 0.6rem 1rem; }
+    .scroll-down { margin-top: 1rem; }
+    .scroll-down a { font-size: 0.75rem; padding: 0.5rem 1rem; }
+    
+    /* ORBES PLUS PETITS */
+    .hero-orb.orb-1 { width: 250px; height: 250px; top: -50px; right: -50px; }
+    .hero-orb.orb-2 { width: 300px; height: 300px; bottom: -100px; left: -100px; }
+    .hero-orb.orb-3 { width: 200px; height: 200px; }
     
     /* LAPTOP 3D HIDDEN ON MOBILE */
     .laptop-3d { display: none; }
     .hero-floating-card { display: none; }
+    .hero-particles { display: none; }
+    
+    /* TRÈS PETITS ÉCRANS */
+    @media (max-width: 480px) {
+      .hero { padding: 4.5rem 0.8rem 1.5rem; }
+      .hero h1 { font-size: 1.4rem; line-height: 1.3; }
+      .hero h1 .highlight { font-size: 1.2rem; }
+      .hero h1 .accent { font-size: 1.5rem; }
+      .hero p { font-size: 0.85rem; }
+      .hero-badge { font-size: 0.65rem; padding: 0.3rem 0.6rem; }
+      .hero-badge-dot { width: 18px; height: 18px; font-size: 0.6rem; }
+      .hero-buttons { max-width: 100%; }
+      .hero-buttons .btn-primary, .hero-buttons .btn-outline { padding: 0.8rem 1.2rem; font-size: 0.85rem; }
+      .hero-stats .stat { padding: 0.6rem 0.8rem; }
+      .hero-stats .stat-icon { font-size: 1.2rem; }
+      .hero-stats .stat-value { font-size: 1.1rem; }
+      .hero-stats .stat-label { font-size: 0.65rem; }
+    }
     
     .inscription-section { padding: 3rem 1rem 4rem; }
     .progress-wrapper { padding: 1.2rem 1rem; }
