@@ -1803,22 +1803,46 @@
   }
 
   @media (max-width: 900px) {
-    .hero-container { grid-template-columns: 1fr; gap: 3rem; }
-    .hero-visual { max-width: 400px; margin: 2rem auto 0; }
+    .hero-container { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-visual { max-width: 350px; margin: 1rem auto 0; }
     .footer-container { grid-template-columns: 1fr; gap: 2rem; }
-    .hero { min-height: auto; padding: 4rem 2rem 3rem; }
+    .hero { min-height: auto; padding: 3rem 1.5rem 2rem; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3rem); }
+    .hero p { font-size: 1rem; }
+    .hero-buttons { flex-direction: column; width: 100%; }
+    .hero-buttons .btn-primary, .hero-buttons .btn-outline { width: 100%; justify-content: center; }
   }
 
   @media (max-width: 768px) {
-    .nav-container { flex-wrap: wrap; gap: 1rem; }
-    .nav-links { gap: 1.2rem; order: 3; width: 100%; justify-content: center; }
-    .cta-btn { padding: 0.7rem 1.2rem; font-size: 0.85rem; }
-    .hero { padding: 3rem 1.5rem 2rem; }
-    .hero h1 { font-size: 2.5rem; }
-    .hero-stats { grid-template-columns: 1fr; gap: 0.8rem; }
-    .hero-stats .stat { display: flex; align-items: center; gap: 1rem; text-align: left; padding: 1rem 1.2rem; }
-    .hero-stats .stat-icon { margin-bottom: 0; font-size: 1.6rem; }
-    .inscription-section { padding: 4rem 1rem 5rem; }
+    /* NAVIGATION MOBILE */
+    nav { padding: 0.8rem 1rem; }
+    .nav-container { flex-wrap: wrap; gap: 0.8rem; }
+    .logo-icon { width: 36px; height: 36px; font-size: 1.1rem; }
+    .logo-text .main { font-size: 1.1rem; }
+    .logo-text .sub { font-size: 0.6rem; }
+    .nav-links { gap: 1rem; order: 3; width: 100%; justify-content: center; font-size: 0.9rem; }
+    .cta-btn { padding: 0.6rem 1rem; font-size: 0.8rem; }
+    
+    /* HERO MOBILE */
+    .hero { padding: 2rem 1rem 2rem; }
+    .hero h1 { font-size: 1.8rem; line-height: 1.2; }
+    .hero p { font-size: 0.95rem; margin-bottom: 1.5rem; }
+    .hero-badge { font-size: 0.75rem; padding: 0.4rem 0.8rem; margin-bottom: 1rem; }
+    .hero-badge-dot { width: 22px; height: 22px; font-size: 0.75rem; }
+    .hero-stats { grid-template-columns: 1fr; gap: 0.6rem; }
+    .hero-stats .stat { display: flex; align-items: center; gap: 0.8rem; text-align: left; padding: 0.8rem 1rem; }
+    .hero-stats .stat-icon { margin-bottom: 0; font-size: 1.4rem; }
+    .hero-stats .stat-value { font-size: 1.3rem; }
+    .hero-stats .stat-label { font-size: 0.75rem; }
+    .hero-visual { display: none; }
+    .scroll-down { margin-top: 1.5rem; }
+    .scroll-down a { font-size: 0.8rem; padding: 0.6rem 1rem; }
+    
+    /* LAPTOP 3D HIDDEN ON MOBILE */
+    .laptop-3d { display: none; }
+    .hero-floating-card { display: none; }
+    
+    .inscription-section { padding: 3rem 1rem 4rem; }
     .progress-wrapper { padding: 1.2rem 1rem; }
     .form-card-body { padding: 1.5rem; }
     .form-grid { grid-template-columns: 1fr; gap: 0; }
