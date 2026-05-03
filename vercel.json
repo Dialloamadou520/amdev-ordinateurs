@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "name": "amdev-ordinateurs",
+  "builds": [
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/site-ordinateurs_4.html"
+    }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
+}

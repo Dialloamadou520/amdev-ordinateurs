@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin | AmDev</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1e7ee8;
+    --primary-dark: #1565c0;
+    --accent: #ff7a45;
+    --accent-light: #ffaa80;
+    --bg: #f8fafc;
+    --text: #1a202c;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* NAVIGATION */
+  nav {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+  }
+
+  .nav-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 42px;
+    height: 42px;
+    background: var(--primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 800;
+    font-size: 1.3rem;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .nav-links a:hover { color: var(--primary); }
+
+  .logout-btn {
+    background: var(--danger);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  /* MAIN CONTAINER */
+  .admin-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .page-header {
+    margin-bottom: 2rem;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+  }
+
+  .page-header p {
+    color: var(--text-muted);
+  }
+
+  /* LOGIN FORM */
+  .login-section {
+    max-width: 400px;
+    margin: 5rem auto;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  }
+
+  .login-section h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+  }
+
+  .form-group input:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+
+  .btn-primary {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .btn-primary:hover { opacity: 0.9; }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    background: white;
+    padding: 0.5rem;
+    border-radius: 12px;
+    width: fit-content;
+  }
+
+  .tab {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .tab.active {
+    background: var(--primary);
+    color: white;
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* CARDS */
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+
+  .card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* FORM GRID */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+
+  .form-grid .full { grid-column: 1 / -1; }
+
+  textarea {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+
+  .features-input {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .features-input input {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-family: inherit;
+  }
+
+  .btn-small {
+    padding: 0.6rem 1rem;
+    background: var(--success);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .features-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .feature-item {
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    color: var(--primary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .feature-item button {
+    background: none;
+    border: none;
+    color: var(--danger);
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .btn-secondary {
+    padding: 0.9rem 1.5rem;
+    background: var(--border);
+    color: var(--text);
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  /* PRODUCTS LIST */
+  .products-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .product-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .product-info-list {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .product-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+
+  .product-details h4 {
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+
+  .product-details p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  .product-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .btn-edit {
+    padding: 0.5rem 1rem;
+    background: var(--warning);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .btn-delete {
+    padding: 0.5rem 1rem;
+    background: var(--danger);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    top: 100px;
+    right: 30px;
+    background: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transform: translateX(400px);
+    transition: transform 0.3s;
+    z-index: 9999;
+  }
+
+  .toast.show { transform: translateX(0); }
+  .toast.success { border-left: 4px solid var(--success); }
+  .toast.error { border-left: 4px solid var(--danger); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .admin-container { padding: 1rem; }
+    .product-item { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .product-actions { width: 100%; }
+    .btn-edit, .btn-delete { flex: 1; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="adminNav" style="display:none;">
+  <div class="nav-container">
+    <a href="site-ordinateurs_4.html" class="logo">
+      <div class="logo-icon">Am</div>
+      <span style="font-weight:800;color:var(--primary);">AmDev Admin</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="site-ordinateurs_4.html">← Retour au site</a></li>
+    </ul>
+    <button class="logout-btn" onclick="logout()">Déconnexion</button>
+  </div>
+</nav>
+
+<div class="admin-container">
+
+  <!-- LOGIN SECTION -->
+  <div id="loginSection" class="login-section">
+    <div class="logo" style="justify-content:center;margin-bottom:1.5rem;">
+      <div class="logo-icon">Am</div>
+    </div>
+    <h2>Connexion Admin</h2>
+    <form id="loginForm" onsubmit="login(event)">
+      <div class="form-group">
+        <label>Mot de passe</label>
+        <input type="password" id="password" placeholder="Entrez le mot de passe" required>
+      </div>
+      <button type="submit" class="btn-primary">Se connecter</button>
+    </form>
+    <p style="text-align:center;margin-top:1rem;color:var(--text-muted);font-size:0.85rem;">
+      Mot de passe par défaut: <code>amdev2026</code>
+    </p>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div id="adminPanel" style="display:none;">
+    <div class="page-header">
+      <h1>Gestion des produits</h1>
+      <p>Ajoutez, modifiez ou supprimez des ordinateurs du catalogue.</p>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('add')">➕ Ajouter</button>
+      <button class="tab" onclick="switchTab('list')">📋 Liste des produits</button>
+    </div>
+
+    <!-- ADD/EDIT FORM -->
+    <div id="addTab" class="tab-content active">
+      <div class="card">
+        <h3 id="formTitle">➕ Ajouter un produit</h3>
+        <form id="productForm" onsubmit="saveProduct(event)">
+          <input type="hidden" id="productId">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Nom du produit *</label>
+              <input type="text" id="productName" placeholder="Ex: HP Pavilion 15" required>
+            </div>
+            <div class="form-group">
+              <label>URL de l'image *</label>
+              <input type="text" id="productImage" placeholder="Ex: images/hp-pavilion-15.jpg" required>
+              <small style="color:var(--text-muted);">Chemin relatif vers l'image (ex: images/nom-image.jpg)</small>
+            </div>
+            <div class="form-group full">
+              <label>Spécifications techniques *</label>
+              <input type="text" id="productSpecs" placeholder="Ex: Intel Core i5-1235U · 8 Go RAM · 512 Go SSD" required>
+            </div>
+            <div class="form-group full">
+              <label>Caractéristiques</label>
+              <div class="features-input">
+                <input type="text" id="featureInput" placeholder="Ex: Écran 15.6\" FHD">
+                <button type="button" class="btn-small" onclick="addFeature()">+ Ajouter</button>
+              </div>
+              <div id="featuresList" class="features-list"></div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-primary" id="saveBtn">💾 Enregistrer</button>
+            <button type="button" class="btn-secondary" onclick="resetForm()">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- PRODUCTS LIST -->
+    <div id="listTab" class="tab-content">
+      <div class="card">
+        <h3>📋 Tous les produits</h3>
+        <div id="productsList" class="products-list">
+          <!-- Products will be loaded here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+  // Default admin password (change this in production!)
+  const ADMIN_PASSWORD = 'amdev2026';
+  const STORAGE_KEY = 'amdev_products';
+
+  let products = [];
+  let currentFeatures = [];
+
+  // Check if already logged in
+  if (localStorage.getItem('amdev_admin_logged_in') === 'true') {
+    showAdminPanel();
+  }
+
+  function login(e) {
+    e.preventDefault();
+    const password = document.getElementById('password').value;
+    if (password === ADMIN_PASSWORD) {
+      localStorage.setItem('amdev_admin_logged_in', 'true');
+      showAdminPanel();
+      showToast('Connexion réussie !', 'success');
+    } else {
+      showToast('Mot de passe incorrect', 'error');
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem('amdev_admin_logged_in');
+    location.reload();
+  }
+
+  function showAdminPanel() {
+    document.getElementById('loginSection').style.display = 'none';
+    document.getElementById('adminPanel').style.display = 'block';
+    document.getElementById('adminNav').style.display = 'block';
+    loadProducts();
+  }
+
+  function switchTab(tab) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    
+    if (tab === 'add') {
+      document.querySelector('.tab:nth-child(1)').classList.add('active');
+      document.getElementById('addTab').classList.add('active');
+    } else {
+      document.querySelector('.tab:nth-child(2)').classList.add('active');
+      document.getElementById('listTab').classList.add('active');
+      loadProductsList();
+    }
+  }
+
+  function addFeature() {
+    const input = document.getElementById('featureInput');
+    const value = input.value.trim();
+    if (value && !currentFeatures.includes(value)) {
+      currentFeatures.push(value);
+      renderFeatures();
+      input.value = '';
+    }
+  }
+
+  function removeFeature(index) {
+    currentFeatures.splice(index, 1);
+    renderFeatures();
+  }
+
+  function renderFeatures() {
+    const container = document.getElementById('featuresList');
+    container.innerHTML = currentFeatures.map((f, i) => `
+      <span class="feature-item">
+        ✓ ${f}
+        <button type="button" onclick="removeFeature(${i})">×</button>
+      </span>
+    `).join('');
+  }
+
+  // Allow Enter key to add feature
+  document.getElementById('featureInput')?.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      addFeature();
+    }
+  });
+
+  function loadProducts() {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      products = JSON.parse(stored);
+    } else {
+      // Default products
+      products = [
+        {
+          id: 1,
+          name: 'HP Pavilion 15',
+          image: 'images/hp-pavilion-15.jpg',
+          specs: 'Intel Core i5-1335U · 16 Go RAM · 512 Go SSD',
+          features: ['Écran 15.6" FHD IPS', 'Windows 11', 'Batterie 10h', 'WiFi 6E', 'USB-C', 'Webcam HP True Vision']
+        },
+        {
+          id: 2,
+          name: 'HP EliteBook 840 G9',
+          image: 'images/hp-elitebook-840.jpg',
+          specs: 'Intel Core i7-1265U · 16 Go RAM · 512 Go SSD',
+          features: ['Écran 14" FHD Sure View', 'Windows 11 Pro', '4G LTE intégré', 'NFC + SmartCard', 'Batterie 14h', 'Châssis aluminium']
+        },
+        {
+          id: 3,
+          name: 'HP ProBook 450 G9',
+          image: 'images/hp-probook-450.jpg',
+          specs: 'Intel Core i5-1235U · 8 Go RAM · 256 Go SSD',
+          features: ['Écran 15.6" FHD', 'Windows 11 Pro', 'Pavé numérique', 'WiFi 6', 'USB-C + HDMI', '1.74 kg']
+        },
+        {
+          id: 4,
+          name: 'Lenovo ThinkPad E15 Gen 4',
+          image: 'images/lenovo-thinkpad-e15.jpg',
+          specs: 'Intel Core i5-1235U · 16 Go RAM · 512 Go SSD',
+          features: ['Écran 15.6" FHD IPS', 'Windows 11 Pro', 'Clavier rétroéclairé', 'Empreinte digitale', 'MIL-STD-810H', 'Batterie 12h']
+        },
+        {
+          id: 5,
+          name: 'Lenovo ThinkPad T14 Gen 3',
+          image: 'images/lenovo-thinkpad-t14.jpg',
+          specs: 'AMD Ryzen 7 PRO 6850U · 16 Go RAM · 512 Go SSD',
+          features: ['Écran 14" WUXGA IPS', 'Windows 11 Pro', '4G LTE optionnel', 'TrackPoint + TouchPad', 'Batterie 14.5h', '1.32 kg']
+        },
+        {
+          id: 6,
+          name: 'Lenovo IdeaPad 3 15ITL6',
+          image: 'images/lenovo-ideapad-3.jpg',
+          specs: 'Intel Core i3-1115G4 · 8 Go RAM · 256 Go SSD',
+          features: ['Écran 15.6" FHD TN', 'Windows 11', 'Dolby Audio', 'WiFi 5', '1.65 kg', 'Entrée de gamme']
+        },
+        {
+          id: 7,
+          name: 'Dell Latitude 5520',
+          image: 'images/dell-latitude-5520.jpg',
+          specs: 'Intel Core i5-1145G7 · 16 Go RAM · 512 Go SSD',
+          features: ['Écran 15.6" FHD', 'Windows 11 Pro', 'Dell Optimizer', 'WiFi 6', 'Thunderbolt 4', 'Garantie ProSupport']
+        },
+        {
+          id: 8,
+          name: 'Dell Inspiron 15 3511',
+          image: 'images/dell-inspiron-15.jpg',
+          specs: 'Intel Core i5-1135G7 · 8 Go RAM · 512 Go SSD',
+          features: ['Écran 15.6" FHD', 'Windows 11', 'Dell Cinema', 'WiFi 6', 'SD Card Reader', '1.73 kg']
+        },
+        {
+          id: 9,
+          name: 'Dell OptiPlex 7010 SFF',
+          image: 'images/dell-optiplex-desktop.jpg',
+          specs: 'Intel Core i7-12700 · 16 Go RAM · 1 To SSD',
+          features: ['Écran 24" FHD Dell', 'Windows 11 Pro', 'Clavier + Souris', 'WiFi 6E', 'Format compact SFF', 'Garantie 3 ans Pro']
+        },
+        {
+          id: 10,
+          name: 'Asus ROG Strix G15',
+          image: 'images/asus-rog-strix.jpg',
+          specs: 'AMD Ryzen 9 7845HX · 32 Go RAM · RTX 4060 8Go',
+          features: ['Écran 15.6" 165Hz FHD', 'Windows 11', 'RGB Aura Sync', 'WiFi 6E', 'Liquid Metal', '1 To SSD NVMe']
+        },
+        {
+          id: 11,
+          name: 'Acer Aspire 5 A515',
+          image: 'images/acer-aspire-5.jpg',
+          specs: 'Intel Core i5-1235U · 16 Go RAM · 512 Go SSD',
+          features: ['Écran 15.6" FHD IPS', 'Windows 11', 'Acer BlueLightShield', 'WiFi 6E', 'USB-C Thunderbolt', '1.76 kg']
+        }
+      ];
+      saveToStorage();
+    }
+  }
+
+  function saveToStorage() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+  }
+
+  function saveProduct(e) {
+    e.preventDefault();
+    
+    const id = document.getElementById('productId').value;
+    const product = {
+      id: id ? parseInt(id) : Date.now(),
+      name: document.getElementById('productName').value,
+      image: document.getElementById('productImage').value,
+      specs: document.getElementById('productSpecs').value,
+      features: [...currentFeatures]
+    };
+
+    if (id) {
+      const index = products.findIndex(p => p.id === parseInt(id));
+      if (index !== -1) products[index] = product;
+    } else {
+      products.push(product);
+    }
+
+    saveToStorage();
+    resetForm();
+    showToast(id ? 'Produit modifié !' : 'Produit ajouté !', 'success');
+  }
+
+  function resetForm() {
+    document.getElementById('productForm').reset();
+    document.getElementById('productId').value = '';
+    document.getElementById('formTitle').textContent = '➕ Ajouter un produit';
+    document.getElementById('saveBtn').textContent = '💾 Enregistrer';
+    currentFeatures = [];
+    renderFeatures();
+    document.getElementById('productImage').value = '';
+  }
+
+  function loadProductsList() {
+    const container = document.getElementById('productsList');
+    if (products.length === 0) {
+      container.innerHTML = '<p style="text-align:center;color:var(--text-muted);">Aucun produit. Ajoutez-en un !</p>';
+      return;
+    }
+
+    container.innerHTML = products.map(p => `
+      <div class="product-item">
+        <div class="product-info-list">
+          <div class="product-icon" style="padding:0;overflow:hidden;">
+            <img src="${p.image || p.icon || ''}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.textContent='💻';">
+          </div>
+          <div class="product-details">
+            <h4>${p.name}</h4>
+            <p>${p.specs}</p>
+          </div>
+        </div>
+        <div class="product-actions">
+          <button class="btn-edit" onclick="editProduct(${p.id})">✏️ Modifier</button>
+          <button class="btn-delete" onclick="deleteProduct(${p.id})">🗑️ Supprimer</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function editProduct(id) {
+    const product = products.find(p => p.id === id);
+    if (!product) return;
+
+    document.getElementById('productId').value = product.id;
+    document.getElementById('productName').value = product.name;
+    document.getElementById('productImage').value = product.image;
+    document.getElementById('productSpecs').value = product.specs;
+    currentFeatures = [...product.features];
+    renderFeatures();
+
+    document.getElementById('formTitle').textContent = '✏️ Modifier le produit';
+    document.getElementById('saveBtn').textContent = '💾 Mettre à jour';
+    
+    switchTab('add');
+    document.getElementById('productName').focus();
+  }
+
+  function deleteProduct(id) {
+    if (!confirm('Supprimer ce produit ?')) return;
+    products = products.filter(p => p.id !== id);
+    saveToStorage();
+    loadProductsList();
+    showToast('Produit supprimé', 'success');
+  }
+
+  function showToast(message, type) {
+    const toast = document.getElementById('toast');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = type === 'success' ? '✓ ' + message : '⚠ ' + message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  }
+</script>
+
+</body>
+</html>
