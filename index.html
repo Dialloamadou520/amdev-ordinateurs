@@ -151,6 +151,48 @@
     justify-content: flex-end;
   }
 
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .cart-btn {
+    position: relative;
+    background: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .cart-btn:hover {
+    background: var(--primary);
+    color: white;
+  }
+
+  .cart-counter {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--accent);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .cta-btn {
     background: linear-gradient(135deg, var(--accent), var(--accent-light));
     color: white;
@@ -1740,7 +1782,7 @@
     font-weight: 600;
     border: 1px solid rgba(30, 126, 232, 0.15);
   }
-  .product-footer { display: flex; justify-content: center; align-items: center; }
+  .product-footer { display: flex; gap: 0.75rem; justify-content: center; align-items: center; }
 
   .product-btn {
     padding: 0.6rem 1.2rem;
@@ -2020,7 +2062,15 @@
         <li><a href="#hero" class="active">Accueil</a></li>
         <li><a href="#inscription">S'inscrire</a></li>
       </ul>
-      <a href="#inscription" class="cta-btn">S'inscrire maintenant</a>
+      <div class="nav-actions">
+        <button class="cart-btn" onclick="toggleCart()" aria-label="Panier">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+          </svg>
+          <span class="cart-counter" id="cartCounter" style="display:none">0</span>
+        </button>
+        <a href="#inscription" class="cta-btn">S'inscrire maintenant</a>
+      </div>
     </div>
   </div>
 </nav>
@@ -2483,7 +2533,10 @@
           <span class="feature-tag">✓ USB-C</span>
           <span class="feature-tag">✓ Webcam HP True Vision</span>
         </div>
-        <div class="product-footer"><button class="product-btn" onclick="commanderWhatsApp('HP Pavilion 15')">Commander</button></div>
+        <div class="product-footer">
+          <button class="product-btn secondary" onclick="addToCart('HP Pavilion 15')">Ajouter au panier</button>
+          <button class="product-btn" onclick="commanderWhatsApp('HP Pavilion 15')">Commander</button>
+        </div>
       </div>
     </div>
     <div class="product-card">
@@ -2499,7 +2552,10 @@
           <span class="feature-tag">✓ Batterie 14h</span>
           <span class="feature-tag">✓ Châssis aluminium</span>
         </div>
-        <div class="product-footer"><button class="product-btn" onclick="commanderWhatsApp('HP EliteBook 840 G9')">Commander</button></div>
+        <div class="product-footer">
+          <button class="product-btn secondary" onclick="addToCart('HP EliteBook 840 G9')">Ajouter au panier</button>
+          <button class="product-btn" onclick="commanderWhatsApp('HP EliteBook 840 G9')">Commander</button>
+        </div>
       </div>
     </div>
     <div class="product-card">
@@ -2515,7 +2571,10 @@
           <span class="feature-tag">✓ USB-C + HDMI</span>
           <span class="feature-tag">✓ 1.74 kg</span>
         </div>
-        <div class="product-footer"><button class="product-btn" onclick="commanderWhatsApp('HP ProBook 450 G9')">Commander</button></div>
+        <div class="product-footer">
+          <button class="product-btn secondary" onclick="addToCart('HP ProBook 450 G9')">Ajouter au panier</button>
+          <button class="product-btn" onclick="commanderWhatsApp('HP ProBook 450 G9')">Commander</button>
+        </div>
       </div>
     </div>
 
@@ -2533,7 +2592,10 @@
           <span class="feature-tag">✓ MIL-STD-810H</span>
           <span class="feature-tag">✓ Batterie 12h</span>
         </div>
-        <div class="product-footer"><button class="product-btn" onclick="commanderWhatsApp('Lenovo ThinkPad E15 Gen 4')">Commander</button></div>
+        <div class="product-footer">
+          <button class="product-btn secondary" onclick="addToCart('Lenovo ThinkPad E15 Gen 4')">Ajouter au panier</button>
+          <button class="product-btn" onclick="commanderWhatsApp('Lenovo ThinkPad E15 Gen 4')">Commander</button>
+        </div>
       </div>
     </div>
     <div class="product-card">
@@ -2549,7 +2611,10 @@
           <span class="feature-tag">✓ Batterie 14.5h</span>
           <span class="feature-tag">✓ 1.32 kg</span>
         </div>
-        <div class="product-footer"><button class="product-btn" onclick="commanderWhatsApp('Lenovo ThinkPad T14 Gen 3')">Commander</button></div>
+        <div class="product-footer">
+          <button class="product-btn secondary" onclick="addToCart('Lenovo ThinkPad T14 Gen 3')">Ajouter au panier</button>
+          <button class="product-btn" onclick="commanderWhatsApp('Lenovo ThinkPad T14 Gen 3')">Commander</button>
+        </div>
       </div>
     </div>
     <div class="product-card">
@@ -2565,7 +2630,10 @@
           <span class="feature-tag">✓ 1.65 kg</span>
           <span class="feature-tag">✓ Entrée de gamme</span>
         </div>
-        <div class="product-footer"><button class="product-btn" onclick="commanderWhatsApp('Lenovo IdeaPad 3 15ITL6')">Commander</button></div>
+        <div class="product-footer">
+          <button class="product-btn secondary" onclick="addToCart('Lenovo IdeaPad 3 15ITL6')">Ajouter au panier</button>
+          <button class="product-btn" onclick="commanderWhatsApp('Lenovo IdeaPad 3 15ITL6')">Commander</button>
+        </div>
       </div>
     </div>
 
@@ -2583,7 +2651,10 @@
           <span class="feature-tag">✓ Thunderbolt 4</span>
           <span class="feature-tag">✓ Garantie ProSupport</span>
         </div>
-        <div class="product-footer"><button class="product-btn" onclick="commanderWhatsApp('Dell Latitude 5520')">Commander</button></div>
+        <div class="product-footer">
+          <button class="product-btn secondary" onclick="addToCart('Dell Latitude 5520')">Ajouter au panier</button>
+          <button class="product-btn" onclick="commanderWhatsApp('Dell Latitude 5520')">Commander</button>
+        </div>
       </div>
     </div>
     <div class="product-card">
@@ -2599,7 +2670,10 @@
           <span class="feature-tag">✓ SD Card Reader</span>
           <span class="feature-tag">✓ 1.73 kg</span>
         </div>
-        <div class="product-footer"><button class="product-btn" onclick="commanderWhatsApp('Dell Inspiron 15 3511')">Commander</button></div>
+        <div class="product-footer">
+          <button class="product-btn secondary" onclick="addToCart('Dell Inspiron 15 3511')">Ajouter au panier</button>
+          <button class="product-btn" onclick="commanderWhatsApp('Dell Inspiron 15 3511')">Commander</button>
+        </div>
       </div>
     </div>
     <div class="product-card">
@@ -2615,7 +2689,10 @@
           <span class="feature-tag">✓ Format compact SFF</span>
           <span class="feature-tag">✓ Garantie 3 ans Pro</span>
         </div>
-        <div class="product-footer"><button class="product-btn" onclick="commanderWhatsApp('Dell OptiPlex 7010 SFF')">Commander</button></div>
+        <div class="product-footer">
+          <button class="product-btn secondary" onclick="addToCart('Dell OptiPlex 7010 SFF')">Ajouter au panier</button>
+          <button class="product-btn" onclick="commanderWhatsApp('Dell OptiPlex 7010 SFF')">Commander</button>
+        </div>
       </div>
     </div>
 
@@ -2633,7 +2710,10 @@
           <span class="feature-tag">✓ Liquid Metal</span>
           <span class="feature-tag">✓ 1 To SSD NVMe</span>
         </div>
-        <div class="product-footer"><button class="product-btn" onclick="commanderWhatsApp('Asus ROG Strix G15')">Commander</button></div>
+        <div class="product-footer">
+          <button class="product-btn secondary" onclick="addToCart('Asus ROG Strix G15')">Ajouter au panier</button>
+          <button class="product-btn" onclick="commanderWhatsApp('Asus ROG Strix G15')">Commander</button>
+        </div>
       </div>
     </div>
     <div class="product-card">
@@ -2649,7 +2729,10 @@
           <span class="feature-tag">✓ USB-C Thunderbolt</span>
           <span class="feature-tag">✓ 1.76 kg</span>
         </div>
-        <div class="product-footer"><button class="product-btn" onclick="commanderWhatsApp('Acer Aspire 5 A515')">Commander</button></div>
+        <div class="product-footer">
+          <button class="product-btn secondary" onclick="addToCart('Acer Aspire 5 A515')">Ajouter au panier</button>
+          <button class="product-btn" onclick="commanderWhatsApp('Acer Aspire 5 A515')">Commander</button>
+        </div>
       </div>
     </div>
   </div>
@@ -2856,12 +2939,133 @@
     document.getElementById('produits').scrollIntoView({behavior:'smooth'});
   }
 
-  // Fonction pour commander via WhatsApp
+  // GESTION DU PANIER
+  const CART_KEY = 'amdev_cart';
+  
+  function getCart() {
+    const cart = localStorage.getItem(CART_KEY);
+    return cart ? JSON.parse(cart) : [];
+  }
+  
+  function saveCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    updateCartCounter();
+  }
+  
+  function addToCart(productName) {
+    const cart = getCart();
+    const existingItem = cart.find(item => item.name === productName);
+    
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cart.push({ name: productName, quantity: 1 });
+    }
+    
+    saveCart(cart);
+    showToast('Produit ajouté au panier ! 🛒', 'success');
+  }
+  
+  function removeFromCart(productName) {
+    let cart = getCart();
+    cart = cart.filter(item => item.name !== productName);
+    saveCart(cart);
+    renderCart();
+  }
+  
+  function updateQuantity(productName, change) {
+    const cart = getCart();
+    const item = cart.find(item => item.name === productName);
+    
+    if (item) {
+      item.quantity += change;
+      if (item.quantity <= 0) {
+        removeFromCart(productName);
+        return;
+      }
+      saveCart(cart);
+      renderCart();
+    }
+  }
+  
+  function updateCartCounter() {
+    const cart = getCart();
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const counter = document.getElementById('cartCounter');
+    if (counter) {
+      counter.textContent = totalItems;
+      counter.style.display = totalItems > 0 ? 'flex' : 'none';
+    }
+  }
+  
+  function renderCart() {
+    const cart = getCart();
+    const cartItems = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+    
+    if (!cartItems) return;
+    
+    if (cart.length === 0) {
+      cartItems.innerHTML = '<p class="empty-cart">Votre panier est vide</p>';
+      cartTotal.textContent = '0 FCFA';
+      return;
+    }
+    
+    let html = '';
+    cart.forEach(item => {
+      html += `
+        <div class="cart-item">
+          <div class="cart-item-info">
+            <h4>${item.name}</h4>
+            <div class="cart-item-quantity">
+              <button onclick="updateQuantity('${item.name}', -1)">-</button>
+              <span>${item.quantity}</span>
+              <button onclick="updateQuantity('${item.name}', 1)">+</button>
+            </div>
+          </div>
+          <button class="remove-btn" onclick="removeFromCart('${item.name}')">✕</button>
+        </div>
+      `;
+    });
+    
+    cartItems.innerHTML = html;
+    cartTotal.textContent = `${cart.length} produit(s)`;
+  }
+  
+  function toggleCart() {
+    const cartModal = document.getElementById('cartModal');
+    if (cartModal) {
+      cartModal.classList.toggle('active');
+      renderCart();
+    }
+  }
+  
+  function commanderPanier() {
+    const cart = getCart();
+    if (cart.length === 0) {
+      showToast('Votre panier est vide', 'error');
+      return;
+    }
+    
+    let message = 'Bonjour AmDev, je souhaite commander les produits suivants :\n\n';
+    cart.forEach(item => {
+      message += `- ${item.name} (x${item.quantity})\n`;
+    });
+    message += '\nMerci de me donner les disponibilités et le prix.';
+    
+    const whatsappUrl = 'https://wa.me/221773525382?text=' + encodeURIComponent(message);
+    window.open(whatsappUrl, '_blank');
+  }
+  
+  // Fonction pour commander via WhatsApp (pour un seul produit)
   function commanderWhatsApp(produit) {
     const message = encodeURIComponent('Bonjour AmDev, je souhaite commander le ' + produit + '. Merci de me donner les disponibilités et le prix.');
     const whatsappUrl = 'https://wa.me/221773525382?text=' + message;
     window.open(whatsappUrl, '_blank');
   }
+
+  // Initialiser le compteur du panier au chargement
+  updateCartCounter();
 
   // Menu Hamburger
   const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -2892,6 +3096,27 @@
     }
   });
 </script>
+
+<!-- Modal Panier -->
+<div class="cart-modal" id="cartModal">
+  <div class="cart-overlay" onclick="toggleCart()"></div>
+  <div class="cart-content">
+    <div class="cart-header">
+      <h3>Votre Panier</h3>
+      <button class="cart-close" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <p class="empty-cart">Votre panier est vide</p>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotal">0 produit(s)</span>
+      </div>
+      <button class="cart-checkout-btn" onclick="commanderPanier()">Commander sur WhatsApp</button>
+    </div>
+  </div>
+</div>
 
 <!-- Bouton WhatsApp flottant -->
 <a href="https://wa.me/221773525382?text=Bonjour%20AmDev,%20je%20souhaite%20passer%20une%20commande" class="whatsapp-float" target="_blank" title="Commander sur WhatsApp">
@@ -2936,6 +3161,196 @@
     .whatsapp-float svg {
       width: 26px;
       height: 26px;
+    }
+  }
+
+  /* CART MODAL */
+  .cart-modal {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 400px;
+    max-width: 90vw;
+    height: 100vh;
+    z-index: 10000;
+    transition: right 0.3s ease;
+  }
+
+  .cart-modal.active {
+    right: 0;
+  }
+
+  .cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+  }
+
+  .cart-modal.active .cart-overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .cart-content {
+    position: relative;
+    background: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -5px 0 30px rgba(0,0,0,0.15);
+  }
+
+  .cart-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cart-header h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .cart-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color 0.3s;
+  }
+
+  .cart-close:hover {
+    color: var(--text);
+  }
+
+  .cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+  }
+
+  .empty-cart {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 2rem;
+  }
+
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--bg-soft);
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+  }
+
+  .cart-item-info h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .cart-item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .cart-item-quantity button {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--border);
+    background: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+
+  .cart-item-quantity button:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+  }
+
+  .cart-item-quantity span {
+    font-weight: 600;
+    min-width: 24px;
+    text-align: center;
+  }
+
+  .remove-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    transition: color 0.2s;
+  }
+
+  .remove-btn:hover {
+    color: #ef4444;
+  }
+
+  .cart-footer {
+    padding: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .cart-checkout-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .cart-checkout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  }
+
+  /* PRODUCT BUTTON SECONDARY */
+  .product-btn.secondary {
+    background: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+  }
+
+  .product-btn.secondary:hover {
+    background: var(--primary);
+    color: white;
+  }
+
+  @media (max-width: 768px) {
+    .cart-modal {
+      width: 100%;
+      max-width: 100%;
     }
   }
 </style>
