@@ -2597,12 +2597,6 @@
   });
 
   function finishSignup() {
-    const type = document.getElementById('typeOrdi').value;
-    const usage = document.getElementById('usage').value;
-    if (!type || !usage) {
-      showToast('Veuillez sélectionner un type d\'ordinateur et un usage.', 'error');
-      return;
-    }
     isRegistered = true;
     document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
     document.querySelector('.form-step[data-step="5"]').classList.add('active');
