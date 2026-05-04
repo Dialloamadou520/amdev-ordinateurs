@@ -2862,6 +2862,8 @@
   }
 
   // Initialiser le compteur du panier et les produits au chargement
+  // Vider le panier au chargement pour remettre à zéro
+  localStorage.removeItem(CART_KEY);
   updateCartCounter();
   renderProducts();
 
