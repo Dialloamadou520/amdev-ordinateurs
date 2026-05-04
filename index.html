@@ -2769,6 +2769,13 @@
     saveCart(cart);
     renderCart();
   }
+
+  function clearCart() {
+    localStorage.removeItem(CART_KEY);
+    updateCartCounter();
+    renderCart();
+    showToast('Panier vidé !', 'success');
+  }
   
   function updateQuantity(productName, change) {
     const cart = getCart();
@@ -2862,8 +2869,6 @@
   }
 
   // Initialiser le compteur du panier et les produits au chargement
-  // Vider le panier au chargement pour remettre à zéro
-  localStorage.removeItem(CART_KEY);
   updateCartCounter();
   renderProducts();
 
@@ -2913,6 +2918,7 @@
         <span>Total:</span>
         <span id="cartTotal">0 produit(s)</span>
       </div>
+      <button class="cart-clear-btn" onclick="clearCart()">Vider le panier</button>
       <button class="cart-checkout-btn" onclick="commanderPanier()">Commander sur WhatsApp</button>
     </div>
   </div>
@@ -3133,6 +3139,24 @@
   .cart-checkout-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  }
+
+  .cart-clear-btn {
+    width: 100%;
+    background: transparent;
+    color: #ef4444;
+    border: 1px solid #ef4444;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: 0.75rem;
+  }
+
+  .cart-clear-btn:hover {
+    background: #ef4444;
+    color: white;
   }
 
   /* PRODUCT BUTTON SECONDARY */
