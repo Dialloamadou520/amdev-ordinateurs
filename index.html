@@ -2598,19 +2598,16 @@
 
   function finishSignup() {
     isRegistered = true;
-    document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
-    document.querySelector('.form-step[data-step="5"]').classList.add('active');
-    document.querySelectorAll('.step').forEach(el => {
-      el.classList.remove('active');
-      el.classList.add('completed');
-    });
-    // Barre de progression à 100%
-    const progressFill = document.getElementById('progressFill');
-    if (progressFill) progressFill.style.width = '100%';
+    // Masquer le formulaire d'inscription
+    document.getElementById('inscription').style.display = 'none';
     // Afficher la section produits
     document.getElementById('produits').style.display = 'block';
     // Recharger les produits depuis localStorage
     renderProducts();
+    // Scroll vers les produits
+    setTimeout(() => {
+      document.getElementById('produits').scrollIntoView({behavior:'smooth'});
+    }, 100);
     showToast('Inscription réussie ! Bienvenue 🎉', 'success');
   }
 
