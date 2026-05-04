@@ -2697,7 +2697,7 @@
   
   // Fonction pour commander via WhatsApp
   function commanderWhatsApp(produit) {
-    const message = encodeURIComponent('Bonjour AmDev, je souhaite commander le ' + produit + '. Merci de me donner les disponibilités et le prix.');
+    const message = encodeURIComponent('Bonjour AmDev,\n\nJe suis intéressé par l\'ordinateur suivant : ' + produit + '.\n\nPourriez-vous me communiquer :\n- La disponibilité du produit\n- Le prix détaillé\n- Les modalités de paiement\n\nMerci par avance pour votre réponse.\nCordialement.');
     const whatsappUrl = 'https://wa.me/221773525382?text=' + message;
     window.open(whatsappUrl, '_blank');
   }
